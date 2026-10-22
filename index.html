@@ -304,13 +304,31 @@ const PERFILES=[
    fases[].aprueba: "" si no requiere aprobación
    fases[].icono: alerta, lupa, familia, escudo, plan, check, libro, persona */
 /* PDF oficial de anexos del MEP (cada anexo abre en su página) */
-const AX="https://www.mep.cr/sites/default/files/documentos/anexos-bullying-word.pdf";
+/* Formularios oficiales de las Pautas de atención y actuación (MEP, 2026).
+   El PDF se publica junto a la plataforma; cada formulario abre en su página. */
+const FP="formularios-pautas-2026.pdf";
+const PAUTAS_DRIVE="https://drive.google.com/file/d/1c2enHqlTX_PmQTuOQ7KSQkNUGDK_OFsb/view";
+const FORMS={
+  1:["Formulario N°1: Información inicial y comunicación a la Dirección (violencia)",1],
+  2:["Formulario N°2: Información inicial y comunicación a la Dirección (vulnerabilidad y riesgo)",3],
+  3:["Formulario N°3: Acta de traslado del estudiante a otra instancia",5],
+  4:["Formulario N°4: Acta de recolección y resguardo de armas y drogas",6],
+  5:["Formulario N°5: Comunicación a la persona encargada legal",7],
+  6:["Formulario N°6: Compilación de información de los estudiantes involucrados",8],
+  7:["Formulario N°7: Referencia a otras instituciones (PANI, CCSS, IAFA…)",12],
+  8:["Formulario N°8: Denuncia a Fiscalía, Penal Juvenil u OIJ",13],
+  9:["Formulario N°9: Referencia por riesgo suicida o salud mental",15],
+  10:["Formulario N°10: Referencia a dependencias internas del MEP",16],
+  11:["Formulario N°11: Informe de actuación",17],
+  12:["Formulario N°12: Informe de seguimiento y cierre del expediente",20]
+};
+const FM=n=>({nombre:FORMS[n][0],enlace:FP+"#page="+FORMS[n][1]});
 
 /* ===== ÁREAS ===== */
 const AREAS=[
   {id:"riesgo",nombre:"Emergencias y gestión del riesgo",corto:"Emergencias",desc:"Sismos, incendios, amenazas, falta de agua o luz",icono:"alerta"},
   {id:"salud",nombre:"Salud y bienestar",corto:"Salud",desc:"Accidentes, crisis de ansiedad, silla de ruedas",icono:"corazon"},
-  {id:"convivencia",nombre:"Convivencia y seguridad",corto:"Convivencia",desc:"Bullying, ingreso y salida, visitantes, vigilancia",icono:"escudo"},
+  {id:"convivencia",nombre:"Convivencia y seguridad",corto:"Convivencia",desc:"Bullying, violencia, ingreso y salida, visitantes",icono:"escudo"},
   {id:"academico",nombre:"Gestión académica",corto:"Académico",desc:"Pruebas, admisión, giras, planeamientos y Teams",icono:"pizarra"},
   {id:"servicios",nombre:"Comedor estudiantil",corto:"Comedor",desc:"Servicio de almuerzo y cambios de menú",icono:"comida"},
   {id:"recursos",nombre:"Equipo, espacios e infraestructura",corto:"Equipo y espacios",desc:"Equipo audiovisual, auditorio, daños y materiales",icono:"carpeta"},
@@ -334,68 +352,71 @@ const L911=(id,predecesoras,responsable,extra=[],nombre="Llamar al 911 y abrir c
   documentos:["Libro de Incidencias"]});
 
 const P=[];
-P.push(  {
-    codigo:"MEP", area:"convivencia",
-    responsableGeneral:"Persona encargada, con apoyo de la Dirección",
-    nombre:"Bullying o acoso escolar",
-    resumen:"Cómo actuar ante la sospecha o detección de bullying entre estudiantes, dentro o fuera del centro educativo, cuando sus efectos se manifiestan en la institución. El fin es que el bullying cese y no vuelva a ocurrir.",
-    perfiles:["administrativo","docente","estudiante","padres"],
-    plazoTotal:"Seguimiento mínimo de 6 meses",
-    formularios:"14 anexos",
-    activa:"Quien detecta la situación o recibe la información",
-    cierre:"Convivencia restaurada en el centro educativo",
-    encargada:"Quien descubre la situación o es informado: docente, asistente de docencia, dirección, orientación o equipo interdisciplinario. Seguridad y personal misceláneo informan en privado a la dirección (o, en su ausencia, a docentes u orientación).",
-    condiciones:["Intencionalidad","Desequilibrio de poder","Repetición en el tiempo","Ocurre entre estudiantes"],
-    alertas:[
-      "Si hay sospecha de violencia sexual, se activa primero ese protocolo.",
-      "Si es otro tipo de violencia (física, psicológica, armas, drogas), se activa el protocolo correspondiente.",
-      "No enfrentar a la víctima con sus agresores ni forzar mediaciones o reconciliaciones.",
-      "Actuar con discreción y confidencialidad para evitar represalias."
-    ],
-    normativa:"Protocolo de actuación en situaciones de bullying (MEP) · Código de la Niñez y la Adolescencia, Ley 7739 · Reglamento de Evaluación de los Aprendizajes · Reglamento General de Establecimientos de Educación Media",
-    fuente:"https://juegosdeportivosestudiantiles.mep.go.cr/wp-content/uploads/2021/08/2-Protocolo-actuacion-situaciones-bullying.pdf",
-    /* ENLACES DE SEGUIMIENTO: pegue aquí el enlace de cada carpeta u hoja del Drive institucional.
-       Si "enlace" está vacío, la plataforma muestra "Enlace pendiente". */
-    recursos:[
-      {icono:"doc",titulo:"Formatos en blanco",desc:"Los 14 anexos oficiales del MEP en un solo documento.",acceso:"Todo el personal",enlace:AX},
-      {icono:"carpeta",titulo:"Expedientes de casos",desc:"Carpeta con la documentación de cada caso abierto.",acceso:"Solo Dirección y Orientación",enlace:""},
-      {icono:"tabla",titulo:"Control de seguimiento",desc:"Registro de casos y fechas de seguimiento del paso 7.",acceso:"Persona encargada y Dirección",enlace:""}
-    ],
-    fases:[
-      {id:"1",nombre:"Detección de la situación",predecesoras:[],plazo:"Inmediato",icono:"lupa",
-       responsable:"Persona encargada",aprueba:"",
-       acciones:["Verificar que se cumplan las 4 condiciones del bullying","Si hay sospecha de violencia sexual u otra violencia, activar primero ese protocolo"],
-       documentos:[]},
-      {id:"2",nombre:"Comunicación a la dirección",predecesoras:[],plazo:"Inmediato, junto con el paso 1",icono:"edificio",
-       responsable:"Quien recibe la información",aprueba:"",
-       acciones:["Informar siempre a la dirección","Si la dirección no está, el proceso continúa igual"],
-       documentos:[{nombre:"Anexo 1: Comunicación escrita a la dirección",enlace:AX+"#page=1"}]},
-      {id:"3",nombre:"Atención de la situación",predecesoras:["1","2"],plazo:"Sin plazo fijo en el protocolo",icono:"escudo",
-       responsable:"Persona encargada",aprueba:"",
-       acciones:["Detener el bullying y vigilar que no se repita","Garantizar la seguridad de la persona afectada","No culpabilizar ni estigmatizar al presunto agresor","Buscar apoyo institucional","Si hay crisis, dar intervención de primer orden"],
-       documentos:[{nombre:"Anexo 2: Intervención en casos de crisis",enlace:AX+"#page=2"}]},
-      {id:"4",nombre:"Comunicación con las familias",predecesoras:["3"],plazo:"Sin plazo fijo · tras 3 citas sin respuesta se avisa al PANI",icono:"familia",
-       responsable:"Persona encargada",aprueba:"",
-       acciones:["Contactar a las familias de la víctima, del presunto agresor y de los observadores","Confirmar la cita por escrito con acuse de recibo","No citar a las familias el mismo día y hora"],
-       documentos:[{nombre:"Anexo 3: Comunicación / cita a madre, padre o responsable",enlace:AX+"#page=4"}]},
-      {id:"5",nombre:"Entrevistas con todas las partes",predecesoras:["4"],plazo:"Sin plazo fijo en el protocolo",icono:"persona",
-       responsable:"Persona encargada",aprueba:"",
-       acciones:["Entrevistar por separado a víctima, observadores y agresores","Asignar un docente de acompañamiento a la víctima","Entrevistar a las familias por separado"],
-       documentos:[{nombre:"Anexo 4: Entrevista con la persona violentada",enlace:AX+"#page=5"},{nombre:"Anexo 5: Entrevista con observadores",enlace:AX+"#page=6"},{nombre:"Anexo 6: Entrevista con quien ejerció la violencia",enlace:AX+"#page=8"},{nombre:"Anexo 7: Entrevista con la familia de la persona violentada",enlace:AX+"#page=10"},{nombre:"Anexo 8: Entrevista con la familia de quien ejerció la violencia",enlace:AX+"#page=12"}]},
-      {id:"6",nombre:"Definir las medidas",predecesoras:["5"],plazo:"Sin plazo fijo en el protocolo",icono:"plan",
-       responsable:"Persona encargada con equipo del centro",aprueba:"",
-       acciones:["Si NO se confirma: comunicarlo a las partes, registrarlo y reforzar la prevención","Si SÍ se confirma: proteger a la víctima, informar a familias y profesorado","Coordinar con otras instituciones y denunciar cuando corresponda","Enviar copia de la denuncia a la Contraloría de Derechos Estudiantiles"],
-       documentos:[{nombre:"Anexo 9: Modelo de informe de actuación",enlace:AX+"#page=14"},{nombre:"Anexo 10: Informe de actuación: apartado de violencia y bullying",enlace:AX+"#page=16"},{nombre:"Anexo 11: Solicitud de intervención del PANI",enlace:AX+"#page=18"},{nombre:"Anexo 12: Denuncia ante la Fiscalía",enlace:AX+"#page=19"},{nombre:"Anexo 13: Referencia a la CCSS",enlace:AX+"#page=20"}]},
-      {id:"7",nombre:"Seguimiento de las medidas",predecesoras:["6"],plazo:"Semanal el 1.er mes · quincenal después · mensual hasta cumplir 6 meses",icono:"reloj",
-       responsable:"Persona encargada (informa a la dirección)",aprueba:"",
-       acciones:["Verificar que las medidas se cumplan","Priorizar lo socioeducativo sobre lo sancionatorio","Evitar la suspensión o exclusión del estudiante"],
-       documentos:[{nombre:"Anexo 14: Modelo de informe de seguimiento",enlace:AX+"#page=21"}]},
-      {id:"8",nombre:"Restaurar la convivencia",predecesoras:["7"],plazo:"Al completar los pasos 1 a 7",icono:"check",
-       responsable:"Centro y comunidad educativa",aprueba:"",
-       acciones:["Proponer un plan de restauración","Fortalecer la autoestima y el empoderamiento de la víctima","Promover la cooperación de los observadores y la concientización del agresor","Incluir el tema en reuniones del personal y con las familias"],
-       documentos:[]}
-    ]
-  });
+P.push({
+  codigo:"Pauta 3", area:"convivencia", nombre:"Bullying o acoso escolar",
+  resumen:"Cómo actuar ante la sospecha o detección de bullying entre estudiantes, con los formularios oficiales de las Pautas 2026. El fin es que el acoso cese y no vuelva a ocurrir.",
+  perfiles:["administrativo","docente","estudiante","padres"],
+  plazoTotal:"Informe en 30 días naturales · seguimiento mínimo 3 meses",
+  activa:"Quien detecta o recibe la información", cierre:"Expediente cerrado con visto bueno de la Dirección",
+  encargada:"La persona funcionaria que detecta o recibe la información activa la pauta y completa los formularios. Seguridad, misceláneos, cocina, oficinistas y secretarias informan de inmediato a la Dirección, que designa a quien la activa.",
+  condiciones:["Intencionalidad","Desequilibrio de poder","Repetición en el tiempo","Ocurre entre estudiantes"],
+  alertas:[`+COMUN_ALERTAS+`],
+  normativa:"Pautas de atención y actuación para manifestaciones de violencia, bullying, vulnerabilidad y riesgo (MEP, 2026) · Pauta 3",
+  fuente:PAUTAS_DRIVE,
+  recursos:[
+    {icono:"doc",titulo:"Formularios oficiales 2026",desc:"Los 12 formularios de las Pautas de actuación, en un solo documento.",acceso:"Todo el personal",enlace:FP},
+    {icono:"carpeta",titulo:"Expedientes de casos",desc:"Un expediente por situación, custodiado en la Dirección.",acceso:"Solo Dirección y persona que activa la pauta",enlace:""}
+  ],
+  fases:[
+    {id:"1",nombre:"Detectar y comunicar a la Dirección",predecesoras:[],plazo:"Inmediato",icono:"lupa",responsable:"Persona funcionaria que detecta",
+     acciones:["Actuar de inmediato: no se requiere solicitud escrita","Verificar las 4 condiciones del bullying","Transcribir el relato tal cual se narra, sin interpretar","Avisar a la Dirección; si no está, el proceso continúa"],documentos:[FM(1)]},
+    {id:"2",nombre:"Comunicar a las familias",predecesoras:["1"],plazo:"Tras identificar a los involucrados",icono:"familia",responsable:"Persona que activa la pauta",
+     acciones:["Citar por separado, por escrito y por medios oficiales a cada familia","No reunir a las partes el mismo día ni a la misma hora","Tras 3 convocatorias sin asistencia justificada, remitir al PANI"],documentos:[FM(5)]},
+    {id:"3",nombre:"Compilar la información",predecesoras:["2"],plazo:"Sin plazo fijo",icono:"persona",responsable:"Persona que activa la pauta",
+     acciones:["Recoger el relato de víctima, observadores y presunto agresor","Cada estudiante acompañado por una persona adulta responsable","Si el relato inicial ya está completo, no repetir la entrevista"],documentos:[FM(6)]},
+    {id:"4",nombre:"Analizar",predecesoras:["3"],plazo:"Sin plazo fijo",icono:"lista",responsable:"Persona que activa la pauta",
+     acciones:["Si NO se confirma: comunicar a las partes, registrarlo en el informe y archivar","Si se confirma: identificar las manifestaciones y pasar a medidas","Si aparece otra situación de riesgo, activar también esa pauta"]},
+    {id:"5",nombre:"Medidas de actuación",predecesoras:["4"],plazo:"Al confirmar",icono:"escudo",responsable:"Persona que activa la pauta",aprueba:"Dirección",
+     acciones:["Proponer a la Dirección medidas de protección (cambio de sección, horarios, cuido de recreos)","Denunciar y referir según la edad: menores de 12 → PANI, CCSS · 12 a 17 → Fiscalía Penal Juvenil, CCSS, PANI · mayores → Fiscalía","Si hay afectación emocional, referir a Psicología o Psiquiatría de la CCSS","Pedir apoyo a Educación Especial o a la Dirección Regional si se requiere"],documentos:[FM(7),FM(8),FM(10)]},
+    {id:"6",nombre:"Informe de actuación",predecesoras:["5"],plazo:"Máximo 30 días naturales",icono:"plan",responsable:"Persona que activa la pauta",
+     acciones:["Registrar todas las acciones de protección y actuación","Informar a cada familia por separado solo lo que corresponde a su estudiante"],documentos:[FM(11)]},
+    {id:"7",nombre:"Seguimiento",predecesoras:["6"],plazo:"Mensual, mínimo 3 meses",icono:"reloj",responsable:"Persona que activa la pauta",
+     acciones:["Verificar que la situación se contuvo","Dar seguimiento a denuncias, referencias y citas de la CCSS","Ajustar las medidas que no funcionen"],documentos:[FM(12)]},
+    {id:"8",nombre:"Cierre del expediente",predecesoras:["7"],plazo:"Al terminar el seguimiento",icono:"check",responsable:"Persona que activa la pauta",aprueba:"Dirección",
+     acciones:["Completar el apartado de cierre del Formulario N°12","Restaurar la convivencia con acciones socioeducativas para el grupo"],documentos:[FM(12)]}
+  ]
+});
+
+P.push({
+  codigo:"Pauta 1", area:"convivencia", nombre:"Violencia física o psicológica entre estudiantes",
+  resumen:"Peleas, agresiones, amenazas o maltrato psicológico entre estudiantes: cómo detener, comunicar, atender y dar seguimiento con los formularios oficiales.",
+  perfiles:["administrativo","docente","estudiante","padres"],
+  plazoTotal:"Informe en 30 días naturales · seguimiento mínimo 3 meses",
+  activa:"Una persona funcionaria detecta o recibe el reporte", cierre:"Expediente cerrado con visto bueno de la Dirección",
+  encargada:"La persona funcionaria que detecta o recibe la información activa la pauta y completa los formularios. Seguridad, misceláneos, cocina, oficinistas y secretarias informan de inmediato a la Dirección, que designa a quien la activa.",
+  alertas:["Si la pelea no se detiene de inmediato, llamar al 9-1-1 y pedir Fuerza Pública.",`+COMUN_ALERTAS+`,"Si fue un accidente y no violencia, no se sigue esta pauta: se reporta como incidente."],
+  normativa:"Pautas de atención y actuación para manifestaciones de violencia, bullying, vulnerabilidad y riesgo (MEP, 2026) · Pauta 1",
+  fuente:PAUTAS_DRIVE,
+  fases:[
+    {id:"1",nombre:"Detener y detectar",predecesoras:[],plazo:"Inmediato",icono:"escudo",responsable:"Persona funcionaria presente",
+     acciones:["Intentar detener la situación (deber de auxilio y vigilancia)","Si un estudiante entra en crisis, contactar a sus encargados","Transcribir el relato tal cual se narra"],documentos:[FM(1)]},
+    L911("2",[],"Persona funcionaria presente o Dirección",["Solicitar la Fuerza Pública"],"Si la pelea no se detiene: 911"),
+    {id:"3",nombre:"Comunicar a la Dirección",predecesoras:["1"],plazo:"Inmediato",icono:"edificio",responsable:"Quien activa la pauta",
+     acciones:["Informar a la persona directora; si no está, el proceso continúa"],documentos:[FM(1)]},
+    {id:"4",nombre:"Comunicar a las familias",predecesoras:["3"],plazo:"Tras identificar a los involucrados",icono:"familia",responsable:"Quien activa la pauta",
+     acciones:["Citar por separado, por escrito y por medios oficiales","No reunir a las partes el mismo día ni a la misma hora","Tras 3 convocatorias sin asistencia justificada, remitir al PANI"],documentos:[FM(5)]},
+    {id:"5",nombre:"Compilar y analizar",predecesoras:["4"],plazo:"Sin plazo fijo",icono:"lista",responsable:"Quien activa la pauta",
+     acciones:["Recoger el relato de cada estudiante, acompañado por un adulto responsable","No cuestionar, culpabilizar ni interpretar","Si NO se confirma: comunicar, registrar en el informe y archivar","Si aparece otra situación de riesgo, activar también esa pauta"],documentos:[FM(6)]},
+    {id:"6",nombre:"Medidas de actuación",predecesoras:["5"],plazo:"Al confirmar",icono:"plan",responsable:"Quien activa la pauta",aprueba:"Dirección",
+     acciones:["Si hay lesiones o riesgo para la vida (p. ej., amenaza de muerte): denunciar al Ministerio Público y referir","Menores de 12 → PANI, CCSS · 12 a 17 → Fiscalía Penal Juvenil, CCSS, PANI · mayores → Fiscalía","Afectación emocional: referir a Psicología o Psiquiatría de la CCSS","Estudiante con discapacidad: pedir apoyo de Educación Especial","Proponer a la Dirección medidas de protección y acciones socioeducativas"],documentos:[FM(7),FM(8),FM(10)]},
+    {id:"7",nombre:"Informe de actuación",predecesoras:["6"],plazo:"Máximo 30 días naturales",icono:"plan",responsable:"Quien activa la pauta",
+     acciones:["Registrar todas las acciones realizadas","Informar a cada familia por separado"],documentos:[FM(11)]},
+    {id:"8",nombre:"Seguimiento",predecesoras:["7"],plazo:"Mensual, mínimo 3 meses",icono:"reloj",responsable:"Quien activa la pauta",
+     acciones:["Verificar que la situación se contuvo","Dar seguimiento a denuncias, referencias y citas de la CCSS","Verificar apoyos educativos y reprogramar evaluaciones si hubo ausencias"],documentos:[FM(12)]},
+    {id:"9",nombre:"Cierre del expediente",predecesoras:["8"],plazo:"Al terminar el seguimiento",icono:"check",responsable:"Quien activa la pauta",aprueba:"Dirección",
+     acciones:["Completar el apartado de cierre del Formulario N°12"],documentos:[FM(12)]}
+  ]
+});
 
 /* ===== GESTIÓN DEL RIESGO (parte 1) ===== */
 P.push({
@@ -636,11 +657,11 @@ P.push({
     {id:"2",nombre:"Proteger de inmediato",predecesoras:[],plazo:"Inmediato",icono:"escudo",responsable:"Todas las personas",
      acciones:["Amenaza: resguardar a las personas; el lugar seguro es la Dirección","Tiroteo: escapar si hay ruta, sin llevar pertenencias","Si no puede salir: cerrar con llave y bloquear la puerta","Alejarse de ventanas, boca abajo, silenciar celulares y apagar la luz"]},
     {id:"3",nombre:"Valorar y denunciar",predecesoras:["1","2"],plazo:"Tras asegurar a las personas",icono:"plan",responsable:"Dirección",
-     acciones:["Analizar cómo, dónde y contra quién es la amenaza","Persona identificada: Ministerio Público · desconocida: OIJ","Si es menor de edad: Fiscalía Penal Juvenil y PANI","Si es estudiante identificado: avisar a la familia y valorar el art. 156 del REA"]},
+     acciones:["Analizar cómo, dónde y contra quién es la amenaza","Persona identificada: Ministerio Público · desconocida: OIJ","Si es menor de edad: Fiscalía Penal Juvenil y PANI","Si es estudiante identificado: avisar a la familia y valorar el art. 156 del REA","Si se recogen armas: levantar el acta de resguardo"],documentos:[FM(2),FM(8),FM(4),FM(5)]},
     {id:"4",nombre:"Coordinar la estrategia",predecesoras:["3"],plazo:"Tras la denuncia",icono:"familia",responsable:"Dirección y Comité de Riesgo",aprueba:"Dirección",
      acciones:["Reunirse con DRE, Supervisión, Contraloría de Derechos Estudiantiles, Fuerza Pública y Policía Municipal","Si la amenaza tiene fecha, valorar suspender lecciones","Informar a la comunidad educativa que se toman medidas"]},
     {id:"5",nombre:"Después: atender y reportar",predecesoras:["4"],plazo:"Después del evento",icono:"check",responsable:"Dirección",
-     acciones:["Referir a estudiantes afectados a Psicología o Psiquiatría de la CCSS","Enviar informe a DRE, Supervisión y Contraloría de Derechos Estudiantiles","Dar contención emocional y seguimiento"],documentos:["Informe de lo actuado","Acta de intervención policial"]}
+     acciones:["Referir a estudiantes afectados a Psicología o Psiquiatría de la CCSS","Enviar informe a DRE, Supervisión y Contraloría de Derechos Estudiantiles","Dar contención emocional y seguimiento"],documentos:[FM(7),FM(11),FM(12),"Acta de intervención policial"]}
   ]
 });
 
@@ -711,9 +732,9 @@ P.push({
     {id:"3",nombre:"Valorar la situación",predecesoras:["1","2"],plazo:"Al llegar el apoyo",icono:"lupa",responsable:"Administrativo o Comité de Riesgos",
      acciones:["Si ya se estabilizó, puede seguir en clase","Si sigue en crisis, trasladar en silla de ruedas a la Administración","Llamar al 911 si se requiere","Si está inconsciente: hablarle, hielo detrás del cuello y volver a llamar al 911 si tarda la ayuda"]},
     {id:"4",nombre:"Avisar a la familia y registrar",predecesoras:["3"],plazo:"Mismo día",icono:"familia",responsable:"Administración",
-     acciones:["Llamar a la madre, padre o encargado","Anotar en el Libro de Incidencias"],documentos:["Libro de Incidencias"]},
+     acciones:["Llamar a la madre, padre o encargado","Anotar en el Libro de Incidencias","Si hay ideación suicida o autolesión: completar Formulario N°2 y referir con el N°9"],documentos:["Libro de Incidencias",FM(2),FM(9)]},
     {id:"5",nombre:"Decisión de la familia",predecesoras:["4"],plazo:"Al llegar la familia",icono:"check",responsable:"Encargado legal",
-     acciones:["Decide si espera a la Cruz Roja o traslada por sus medios","Si se estabiliza antes, puede pedir cancelar la unidad","Firma su decisión en el Libro de Incidencias"]}
+     acciones:["Decide si espera a la Cruz Roja o traslada por sus medios","Si se estabiliza antes, puede pedir cancelar la unidad","Firma su decisión en el Libro de Incidencias","Si el estudiante es trasladado a otra instancia, levantar el acta de traslado"],documentos:["Libro de Incidencias",FM(3)]}
   ]
 });
 
@@ -734,7 +755,7 @@ P.push({
     {id:"3",nombre:"Traslado a Dirección",predecesoras:["1","2"],plazo:"Si requiere Cruz Roja",icono:"edificio",responsable:"Comité de Riesgos",
      acciones:["Valorar traslado en silla de ruedas o camilla a la Dirección"]},
     {id:"4",nombre:"Acompañar o entregar",predecesoras:["3"],plazo:"Según el paramédico",icono:"familia",responsable:"Funcionario designado",
-     acciones:["Si lo trasladan a un centro médico y la familia no ha llegado, un funcionario lo acompaña","Si la familia decide llevárselo, firma en el Libro de Incidencias y se llama al 911 para cancelar"]}
+     acciones:["Si lo trasladan a un centro médico y la familia no ha llegado, un funcionario lo acompaña","Levantar el acta de traslado","Si la familia decide llevárselo, firma en el Libro de Incidencias y se llama al 911 para cancelar"],documentos:["Libro de Incidencias",FM(3)]}
   ]
 });
 
@@ -779,7 +800,7 @@ P.push({
     {id:"3",nombre:"Comunicación con familias",predecesoras:["1","2"],plazo:"Siempre",icono:"familia",responsable:"Docentes",
      acciones:["Reportar situaciones a tiempo a la familia","Usar solo canales oficiales: correo MEP, cuaderno de comunicaciones o Teams","Levantar acta de cada reunión y entregar copia firmada"],documentos:["Boleta de atención a padres de familia"]},
     {id:"4",nombre:"Ante una situación",predecesoras:["3"],plazo:"Cuando ocurra",icono:"alerta",responsable:"Persona funcionaria",
-     acciones:["Aclarar las razones si algo se malinterpretó","Denunciar ante el Ministerio Público amenazas recibidas","Atender las alertas de los compañeros"]}
+     acciones:["Aclarar las razones si algo se malinterpretó","Denunciar ante el Ministerio Público amenazas recibidas","Atender las alertas de los compañeros","Ante sospecha de violencia de un funcionario hacia un estudiante, se activa la Pauta 4 con el Formulario N°1"],documentos:[FM(1)]}
   ]
 });
 
@@ -1385,7 +1406,7 @@ P.push({
     {id:"2",nombre:"Inspeccionar",predecesoras:["1"],plazo:"Al recibir el reporte",icono:"lupa",responsable:"Directora",
      acciones:["Realizar una inspección e investigación","Revisar bolsos según los lineamientos vigentes","En casos muy calificados, pedir apoyo policial"]},
     {id:"3",nombre:"Devolver o denunciar",predecesoras:["2"],plazo:"Según el resultado",icono:"check",responsable:"Directora",
-     acciones:["Si aparece, devolver al comprobar que es suyo y levantar acta","Si se comprueba el robo, hacer la denuncia"],documentos:["Acta de devolución"]}
+     acciones:["Si aparece, devolver al comprobar que es suyo y levantar acta","Si se comprueba el robo, hacer la denuncia"],documentos:["Acta de devolución",FM(8)]}
   ]
 });
 
@@ -1825,6 +1846,8 @@ function siempre(){
       <div class="d911"><span>Ante cualquier emergencia</span><b>9-1-1</b></div>
       <dl>${DIRECTORIO.slice(1).map(([n,t])=>`<div><dt>${esc(n)}</dt><dd>${esc(t)}</dd></div>`).join("")}</dl>
     </div>
+    <a class="norma" href="${FP}" target="_blank" rel="noopener"><span class="r-ico">${svg("doc")}</span>
+      <span><b>Formularios oficiales de las Pautas 2026</b><small>Formularios N°1 al N°12 para atender cualquier situación</small></span><span class="arr">→</span></a>
     <a class="norma" href="${NORMATIVA}" target="_blank" rel="noopener"><span class="r-ico">${svg("libro")}</span>
       <span><b>Normativa Interna vigente 2026</b><small>Reglas de convivencia y funcionamiento del colegio</small></span><span class="arr">→</span></a>
   </div>`;
