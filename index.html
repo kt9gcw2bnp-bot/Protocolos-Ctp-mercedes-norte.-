@@ -112,6 +112,21 @@ h3.sec{font:800 26px/1.1 var(--display);letter-spacing:-.015em;margin:34px 0 4px
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted);margin-bottom:16px}
 .legend span{display:inline-flex;align-items:center;gap:8px}
 .lg-node{width:16px;height:16px;border-radius:50%;background:var(--c)}
+.etapa{display:block;margin:12px 14px -4px;font:800 11.5px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.stamp + .node-btn .etapa{margin-right:96px}
+.fchips{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:0 14px 14px;margin-top:-4px;font-size:13px;color:var(--muted)}
+.fchips a{font:800 13px var(--display);color:var(--c);background:var(--bg);border:1.5px solid var(--c);border-radius:8px;padding:3px 9px;text-decoration:none}
+.fchips a:hover{background:var(--c);color:#fff}
+.guia{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.g-et{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.g-h{display:flex;align-items:center;gap:8px}
+.g-h b{width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:800 14px var(--display);flex:none}
+.g-h span{font:800 14.5px/1.15 var(--display)}
+.g-f{display:flex;gap:8px;align-items:flex-start;text-decoration:none;color:var(--ink);font-size:13.5px;line-height:1.3;padding:6px;border-radius:10px;background:var(--bg)}
+.g-f:hover{outline:2px solid var(--c)}
+.g-f em{font:800 13px var(--display);font-style:normal;color:var(--c);white-space:nowrap}
+@media (max-width:760px){.guia{grid-template-columns:1fr 1fr}}
+@media (max-width:440px){.guia{grid-template-columns:1fr}}
 .lg-sos{background:var(--stamp)!important}
 .node.sos{border-color:var(--stamp);background:linear-gradient(var(--paper),var(--paper)) padding-box}
 .node.sos .badge{background:var(--stamp)}
@@ -322,7 +337,15 @@ const FORMS={
   11:["Formulario N°11: Informe de actuación",17],
   12:["Formulario N°12: Informe de seguimiento y cierre del expediente",20]
 };
-const FM=n=>({nombre:FORMS[n][0],enlace:FP+"#page="+FORMS[n][1]});
+const FM=n=>({nombre:FORMS[n][0],enlace:FP+"#page="+FORMS[n][1],n});
+/* Etapas comunes de toda pauta y formulario que corresponde en cada una */
+const ETAPAS={1:"Detección y comunicación",2:"Atención de la situación",3:"Medidas e informe de actuación",4:"Seguimiento y cierre"};
+const GUIA=[
+  {e:1,f:[[1,"Si es violencia o bullying"],[2,"Si es vulnerabilidad o riesgo (autolesión, drogas, armas, embarazo)"],[5,"Citar a cada familia por separado"],[3,"Si el estudiante es trasladado a otra instancia"],[4,"Si se recogen armas o drogas"]]},
+  {e:2,f:[[6,"Relatos de víctima, observadores y presunto responsable"]]},
+  {e:3,f:[[7,"Referir a PANI, CCSS, IAFA u otras"],[8,"Denunciar ante Fiscalía, Penal Juvenil u OIJ"],[9,"Riesgo suicida o salud mental"],[10,"Apoyo de dependencias del MEP"],[11,"Informe de actuación (máx. 30 días naturales)"]]},
+  {e:4,f:[[12,"Seguimiento mensual y cierre del expediente"]]}
+];
 
 /* ===== ÁREAS ===== */
 const AREAS=[
@@ -353,7 +376,7 @@ const L911=(id,predecesoras,responsable,extra=[],nombre="Llamar al 911 y abrir c
 
 const P=[];
 P.push({
-  codigo:"Pauta 3", area:"convivencia", nombre:"Bullying o acoso escolar",
+  codigo:"Pauta 3", area:"convivencia", pauta:true, nombre:"Bullying o acoso escolar",
   resumen:"Cómo actuar ante la sospecha o detección de bullying entre estudiantes, con los formularios oficiales de las Pautas 2026. El fin es que el acoso cese y no vuelva a ocurrir.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Informe en 30 días naturales · seguimiento mínimo 3 meses",
@@ -368,27 +391,27 @@ P.push({
     {icono:"carpeta",titulo:"Expedientes de casos",desc:"Un expediente por situación, custodiado en la Dirección.",acceso:"Solo Dirección y persona que activa la pauta",enlace:""}
   ],
   fases:[
-    {id:"1",nombre:"Detectar y comunicar a la Dirección",predecesoras:[],plazo:"Inmediato",icono:"lupa",responsable:"Persona funcionaria que detecta",
+    {id:"1",etapa:1,nombre:"Detectar y comunicar a la Dirección",predecesoras:[],plazo:"Inmediato",icono:"lupa",responsable:"Persona funcionaria que detecta",
      acciones:["Actuar de inmediato: no se requiere solicitud escrita","Verificar las 4 condiciones del bullying","Transcribir el relato tal cual se narra, sin interpretar","Avisar a la Dirección; si no está, el proceso continúa"],documentos:[FM(1)]},
-    {id:"2",nombre:"Comunicar a las familias",predecesoras:["1"],plazo:"Tras identificar a los involucrados",icono:"familia",responsable:"Persona que activa la pauta",
+    {id:"2",etapa:1,nombre:"Comunicar a las familias",predecesoras:["1"],plazo:"Tras identificar a los involucrados",icono:"familia",responsable:"Persona que activa la pauta",
      acciones:["Citar por separado, por escrito y por medios oficiales a cada familia","No reunir a las partes el mismo día ni a la misma hora","Tras 3 convocatorias sin asistencia justificada, remitir al PANI"],documentos:[FM(5)]},
-    {id:"3",nombre:"Compilar la información",predecesoras:["2"],plazo:"Sin plazo fijo",icono:"persona",responsable:"Persona que activa la pauta",
+    {id:"3",etapa:2,nombre:"Compilar la información",predecesoras:["2"],plazo:"Sin plazo fijo",icono:"persona",responsable:"Persona que activa la pauta",
      acciones:["Recoger el relato de víctima, observadores y presunto agresor","Cada estudiante acompañado por una persona adulta responsable","Si el relato inicial ya está completo, no repetir la entrevista"],documentos:[FM(6)]},
-    {id:"4",nombre:"Analizar",predecesoras:["3"],plazo:"Sin plazo fijo",icono:"lista",responsable:"Persona que activa la pauta",
+    {id:"4",etapa:2,nombre:"Analizar",predecesoras:["3"],plazo:"Sin plazo fijo",icono:"lista",responsable:"Persona que activa la pauta",
      acciones:["Si NO se confirma: comunicar a las partes, registrarlo en el informe y archivar","Si se confirma: identificar las manifestaciones y pasar a medidas","Si aparece otra situación de riesgo, activar también esa pauta"]},
-    {id:"5",nombre:"Medidas de actuación",predecesoras:["4"],plazo:"Al confirmar",icono:"escudo",responsable:"Persona que activa la pauta",aprueba:"Dirección",
+    {id:"5",etapa:3,nombre:"Medidas de actuación",predecesoras:["4"],plazo:"Al confirmar",icono:"escudo",responsable:"Persona que activa la pauta",aprueba:"Dirección",
      acciones:["Proponer a la Dirección medidas de protección (cambio de sección, horarios, cuido de recreos)","Denunciar y referir según la edad: menores de 12 → PANI, CCSS · 12 a 17 → Fiscalía Penal Juvenil, CCSS, PANI · mayores → Fiscalía","Si hay afectación emocional, referir a Psicología o Psiquiatría de la CCSS","Pedir apoyo a Educación Especial o a la Dirección Regional si se requiere"],documentos:[FM(7),FM(8),FM(10)]},
-    {id:"6",nombre:"Informe de actuación",predecesoras:["5"],plazo:"Máximo 30 días naturales",icono:"plan",responsable:"Persona que activa la pauta",
+    {id:"6",etapa:3,nombre:"Informe de actuación",predecesoras:["5"],plazo:"Máximo 30 días naturales",icono:"plan",responsable:"Persona que activa la pauta",
      acciones:["Registrar todas las acciones de protección y actuación","Informar a cada familia por separado solo lo que corresponde a su estudiante"],documentos:[FM(11)]},
-    {id:"7",nombre:"Seguimiento",predecesoras:["6"],plazo:"Mensual, mínimo 3 meses",icono:"reloj",responsable:"Persona que activa la pauta",
+    {id:"7",etapa:4,nombre:"Seguimiento",predecesoras:["6"],plazo:"Mensual, mínimo 3 meses",icono:"reloj",responsable:"Persona que activa la pauta",
      acciones:["Verificar que la situación se contuvo","Dar seguimiento a denuncias, referencias y citas de la CCSS","Ajustar las medidas que no funcionen"],documentos:[FM(12)]},
-    {id:"8",nombre:"Cierre del expediente",predecesoras:["7"],plazo:"Al terminar el seguimiento",icono:"check",responsable:"Persona que activa la pauta",aprueba:"Dirección",
+    {id:"8",etapa:4,nombre:"Cierre del expediente",predecesoras:["7"],plazo:"Al terminar el seguimiento",icono:"check",responsable:"Persona que activa la pauta",aprueba:"Dirección",
      acciones:["Completar el apartado de cierre del Formulario N°12","Restaurar la convivencia con acciones socioeducativas para el grupo"],documentos:[FM(12)]}
   ]
 });
 
 P.push({
-  codigo:"Pauta 1", area:"convivencia", nombre:"Violencia física o psicológica entre estudiantes",
+  codigo:"Pauta 1", area:"convivencia", pauta:true, nombre:"Violencia física o psicológica entre estudiantes",
   resumen:"Peleas, agresiones, amenazas o maltrato psicológico entre estudiantes: cómo detener, comunicar, atender y dar seguimiento con los formularios oficiales.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Informe en 30 días naturales · seguimiento mínimo 3 meses",
@@ -398,22 +421,22 @@ P.push({
   normativa:"Pautas de atención y actuación para manifestaciones de violencia, bullying, vulnerabilidad y riesgo (MEP, 2026) · Pauta 1",
   fuente:PAUTAS_DRIVE,
   fases:[
-    {id:"1",nombre:"Detener y detectar",predecesoras:[],plazo:"Inmediato",icono:"escudo",responsable:"Persona funcionaria presente",
+    {id:"1",etapa:1,nombre:"Detener y detectar",predecesoras:[],plazo:"Inmediato",icono:"escudo",responsable:"Persona funcionaria presente",
      acciones:["Intentar detener la situación (deber de auxilio y vigilancia)","Si un estudiante entra en crisis, contactar a sus encargados","Transcribir el relato tal cual se narra"],documentos:[FM(1)]},
-    L911("2",[],"Persona funcionaria presente o Dirección",["Solicitar la Fuerza Pública"],"Si la pelea no se detiene: 911"),
-    {id:"3",nombre:"Comunicar a la Dirección",predecesoras:["1"],plazo:"Inmediato",icono:"edificio",responsable:"Quien activa la pauta",
+    {...L911("2",[],"Persona funcionaria presente o Dirección",["Solicitar la Fuerza Pública"],"Si la pelea no se detiene: 911"),etapa:1},
+    {id:"3",etapa:1,nombre:"Comunicar a la Dirección",predecesoras:["1"],plazo:"Inmediato",icono:"edificio",responsable:"Quien activa la pauta",
      acciones:["Informar a la persona directora; si no está, el proceso continúa"],documentos:[FM(1)]},
-    {id:"4",nombre:"Comunicar a las familias",predecesoras:["3"],plazo:"Tras identificar a los involucrados",icono:"familia",responsable:"Quien activa la pauta",
+    {id:"4",etapa:1,nombre:"Comunicar a las familias",predecesoras:["3"],plazo:"Tras identificar a los involucrados",icono:"familia",responsable:"Quien activa la pauta",
      acciones:["Citar por separado, por escrito y por medios oficiales","No reunir a las partes el mismo día ni a la misma hora","Tras 3 convocatorias sin asistencia justificada, remitir al PANI"],documentos:[FM(5)]},
-    {id:"5",nombre:"Compilar y analizar",predecesoras:["4"],plazo:"Sin plazo fijo",icono:"lista",responsable:"Quien activa la pauta",
+    {id:"5",etapa:2,nombre:"Compilar y analizar",predecesoras:["4"],plazo:"Sin plazo fijo",icono:"lista",responsable:"Quien activa la pauta",
      acciones:["Recoger el relato de cada estudiante, acompañado por un adulto responsable","No cuestionar, culpabilizar ni interpretar","Si NO se confirma: comunicar, registrar en el informe y archivar","Si aparece otra situación de riesgo, activar también esa pauta"],documentos:[FM(6)]},
-    {id:"6",nombre:"Medidas de actuación",predecesoras:["5"],plazo:"Al confirmar",icono:"plan",responsable:"Quien activa la pauta",aprueba:"Dirección",
+    {id:"6",etapa:3,nombre:"Medidas de actuación",predecesoras:["5"],plazo:"Al confirmar",icono:"plan",responsable:"Quien activa la pauta",aprueba:"Dirección",
      acciones:["Si hay lesiones o riesgo para la vida (p. ej., amenaza de muerte): denunciar al Ministerio Público y referir","Menores de 12 → PANI, CCSS · 12 a 17 → Fiscalía Penal Juvenil, CCSS, PANI · mayores → Fiscalía","Afectación emocional: referir a Psicología o Psiquiatría de la CCSS","Estudiante con discapacidad: pedir apoyo de Educación Especial","Proponer a la Dirección medidas de protección y acciones socioeducativas"],documentos:[FM(7),FM(8),FM(10)]},
-    {id:"7",nombre:"Informe de actuación",predecesoras:["6"],plazo:"Máximo 30 días naturales",icono:"plan",responsable:"Quien activa la pauta",
+    {id:"7",etapa:3,nombre:"Informe de actuación",predecesoras:["6"],plazo:"Máximo 30 días naturales",icono:"plan",responsable:"Quien activa la pauta",
      acciones:["Registrar todas las acciones realizadas","Informar a cada familia por separado"],documentos:[FM(11)]},
-    {id:"8",nombre:"Seguimiento",predecesoras:["7"],plazo:"Mensual, mínimo 3 meses",icono:"reloj",responsable:"Quien activa la pauta",
+    {id:"8",etapa:4,nombre:"Seguimiento",predecesoras:["7"],plazo:"Mensual, mínimo 3 meses",icono:"reloj",responsable:"Quien activa la pauta",
      acciones:["Verificar que la situación se contuvo","Dar seguimiento a denuncias, referencias y citas de la CCSS","Verificar apoyos educativos y reprogramar evaluaciones si hubo ausencias"],documentos:[FM(12)]},
-    {id:"9",nombre:"Cierre del expediente",predecesoras:["8"],plazo:"Al terminar el seguimiento",icono:"check",responsable:"Quien activa la pauta",aprueba:"Dirección",
+    {id:"9",etapa:4,nombre:"Cierre del expediente",predecesoras:["8"],plazo:"Al terminar el seguimiento",icono:"check",responsable:"Quien activa la pauta",aprueba:"Dirección",
      acciones:["Completar el apartado de cierre del Formulario N°12"],documentos:[FM(12)]}
   ]
 });
@@ -643,7 +666,7 @@ P.push({
 });
 
 P.push({
-  codigo:"V-18", area:"riesgo", nombre:"Amenaza o tiroteo en el colegio",
+  codigo:"V-18", atencion:true, area:"riesgo", nombre:"Amenaza o tiroteo en el colegio",
   resumen:"Cómo actuar ante una amenaza de tiroteo y qué hacer durante y después de un tiroteo dentro del centro educativo.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -661,12 +684,12 @@ P.push({
     {id:"4",nombre:"Coordinar la estrategia",predecesoras:["3"],plazo:"Tras la denuncia",icono:"familia",responsable:"Dirección y Comité de Riesgo",aprueba:"Dirección",
      acciones:["Reunirse con DRE, Supervisión, Contraloría de Derechos Estudiantiles, Fuerza Pública y Policía Municipal","Si la amenaza tiene fecha, valorar suspender lecciones","Informar a la comunidad educativa que se toman medidas"]},
     {id:"5",nombre:"Después: atender y reportar",predecesoras:["4"],plazo:"Después del evento",icono:"check",responsable:"Dirección",
-     acciones:["Referir a estudiantes afectados a Psicología o Psiquiatría de la CCSS","Enviar informe a DRE, Supervisión y Contraloría de Derechos Estudiantiles","Dar contención emocional y seguimiento"],documentos:[FM(7),FM(11),FM(12),"Acta de intervención policial"]}
+     acciones:["Referir a estudiantes afectados a Psicología o Psiquiatría de la CCSS","Enviar informe a DRE, Supervisión y Contraloría de Derechos Estudiantiles","Dar contención emocional y seguimiento"],documentos:[FM(7),FM(11),FM(12)]}
   ]
 });
 
 P.push({
-  codigo:"V-33", area:"riesgo", nombre:"Amenaza de explosivo en el colegio",
+  codigo:"V-33", atencion:true, area:"riesgo", nombre:"Amenaza de explosivo en el colegio",
   resumen:"Evento crítico: cómo alertar, evacuar y ponerse a salvo ante una amenaza de explosivo dentro del centro educativo.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -686,12 +709,12 @@ P.push({
     {id:"5",nombre:"Barrer áreas y cerrar portones",predecesoras:["3"],plazo:"Simultáneo",icono:"escudo",responsable:"Personal sin grupo y vigilancia",
      acciones:["Personal sin grupo revisa que nadie quede en aulas, baños u oficinas","Vigilancia cierra portones: solo entran vehículos de emergencia"]},
     {id:"6",nombre:"Esperar y entregar",predecesoras:["1","4","5"],plazo:"Hasta nueva indicación",icono:"familia",responsable:"Docentes y Dirección",
-     acciones:["Esperar indicaciones de las autoridades","Entregar a cada estudiante a su familia"],documentos:["Compromiso de padres de familia: protocolo en caso de emergencia","Reporte breve del evento crítico"]}
+     acciones:["Esperar indicaciones de las autoridades","Entregar a cada estudiante a su familia"],documentos:[FM(5)]}
   ]
 });
 
 P.push({
-  codigo:"V-34", area:"riesgo", nombre:"Amenaza de explosivo o arma fuera del colegio",
+  codigo:"V-34", atencion:true, area:"riesgo", nombre:"Amenaza de explosivo o arma fuera del colegio",
   resumen:"Evento crítico externo: cierre del colegio y resguardo dentro de aulas y oficinas.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -709,13 +732,13 @@ P.push({
     {id:"4",nombre:"Alarma y resguardo",predecesoras:["2"],plazo:"Simultáneo",icono:"escudo",responsable:"Docentes y todas las personas",
      acciones:["Se activa la alarma de incendio como señal","Docentes en el aula con sus estudiantes a puerta cerrada","Quien esté afuera entra al aula, baño u oficina más cercana","Alejarse de ventanas, bloquear la puerta y ponerse boca abajo"]},
     {id:"5",nombre:"Esperar indicaciones",predecesoras:["1","3","4"],plazo:"Hasta que las autoridades indiquen",icono:"check",responsable:"Dirección",
-     acciones:["Nadie sale hasta recibir la indicación de las autoridades"],documentos:["Reporte breve del evento crítico"]}
+     acciones:["Nadie sale hasta recibir la indicación de las autoridades"]}
   ]
 });
 
 /* ===== SALUD Y BIENESTAR ===== */
 P.push({
-  codigo:"V-20", area:"salud", nombre:"Crisis de ansiedad o de control emocional",
+  codigo:"V-20", atencion:true, area:"salud", nombre:"Crisis de ansiedad o de control emocional",
   resumen:"Cómo contener a una persona en crisis de ansiedad o sin control de sus emociones mientras llega ayuda.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -739,7 +762,7 @@ P.push({
 });
 
 P.push({
-  codigo:"V-32", area:"salud", nombre:"Accidente o incidente de salud",
+  codigo:"V-32", atencion:true, area:"salud", nombre:"Accidente o incidente de salud",
   resumen:"Qué hacer cuando un estudiante sufre un accidente o problema de salud dentro o fuera del aula.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -783,7 +806,7 @@ P.push({
 
 /* ===== CONVIVENCIA Y SEGURIDAD ===== */
 P.push({
-  codigo:"V-17", area:"convivencia", nombre:"Prevención de denuncias por Ley 9999",
+  codigo:"V-17", atencion:true, area:"convivencia", nombre:"Prevención de denuncias por Ley 9999",
   resumen:"Pautas para el personal que previenen situaciones de maltrato físico, psicológico o verbal hacia estudiantes.",
   perfiles:["administrativo","docente"],
   plazoTotal:"Aplicación permanente",
@@ -798,7 +821,7 @@ P.push({
     {id:"2",nombre:"Contacto y espacios",predecesoras:[],plazo:"Siempre",icono:"escudo",responsable:"Personas funcionarias",
      acciones:["Evitar abrazos o palmadas","No tomar del brazo o la mano para dar indicaciones","En una contención, estar acompañado de testigos","Pedir consentimiento antes de usar a alguien de ejemplo"]},
     {id:"3",nombre:"Comunicación con familias",predecesoras:["1","2"],plazo:"Siempre",icono:"familia",responsable:"Docentes",
-     acciones:["Reportar situaciones a tiempo a la familia","Usar solo canales oficiales: correo MEP, cuaderno de comunicaciones o Teams","Levantar acta de cada reunión y entregar copia firmada"],documentos:["Boleta de atención a padres de familia"]},
+     acciones:["Reportar situaciones a tiempo a la familia","Usar solo canales oficiales: correo MEP, cuaderno de comunicaciones o Teams","Levantar acta de cada reunión y entregar copia firmada"],documentos:[FM(5)]},
     {id:"4",nombre:"Ante una situación",predecesoras:["3"],plazo:"Cuando ocurra",icono:"alerta",responsable:"Persona funcionaria",
      acciones:["Aclarar las razones si algo se malinterpretó","Denunciar ante el Ministerio Público amenazas recibidas","Atender las alertas de los compañeros","Ante sospecha de violencia de un funcionario hacia un estudiante, se activa la Pauta 4 con el Formulario N°1"],documentos:[FM(1)]}
   ]
@@ -1391,7 +1414,7 @@ P.push({
 });
 
 P.push({
-  codigo:"V-09", area:"convivencia", nombre:"Pérdida o robo de objetos personales",
+  codigo:"V-09", atencion:true, area:"convivencia", nombre:"Pérdida o robo de objetos personales",
   resumen:"Qué hacer cuando un estudiante, funcionario o visitante pierde un objeto o sufre un robo en el colegio.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Al reportar la pérdida",
@@ -1406,7 +1429,7 @@ P.push({
     {id:"2",nombre:"Inspeccionar",predecesoras:["1"],plazo:"Al recibir el reporte",icono:"lupa",responsable:"Directora",
      acciones:["Realizar una inspección e investigación","Revisar bolsos según los lineamientos vigentes","En casos muy calificados, pedir apoyo policial"]},
     {id:"3",nombre:"Devolver o denunciar",predecesoras:["2"],plazo:"Según el resultado",icono:"check",responsable:"Directora",
-     acciones:["Si aparece, devolver al comprobar que es suyo y levantar acta","Si se comprueba el robo, hacer la denuncia"],documentos:["Acta de devolución",FM(8)]}
+     acciones:["Si aparece, devolver al comprobar que es suyo y levantar acta","Si se comprueba el robo, hacer la denuncia"],documentos:[FM(8)]}
   ]
 });
 
@@ -1874,18 +1897,28 @@ function nodo(n){
   return `<div class="node${open?" open":""}${n.emergencia?" sos":""}">
     ${n.aprueba?`<span class="stamp">Aprueba<br>${esc(n.aprueba)}</span>`:""}
     <button class="node-btn" data-node="${n.id}" aria-expanded="${open}">
+      ${n.etapa?`<span class="etapa">Etapa ${n.etapa} · ${ETAPAS[n.etapa]}</span>`:""}
       <span class="n-head"><span class="badge">${svg(n.icono)}<em>${n.id}</em></span><span class="n-title">${esc(n.nombre)}</span></span>
       <span class="time">${svg("reloj")}${esc(n.plazo)}</span>
       <span class="who">${svg("persona")}<span><b>${esc(n.responsable)}</b></span></span>
       ${open?"":`<span class="tap"><span class="cta sm">Ver qué se hace y documentos <span class="arr">↓</span></span></span>`}
     </button>
+    ${(n.documentos||[]).some(d=>d.n)?`<div class="fchips"><span>Formularios:</span>${n.documentos.filter(d=>d.n).map(d=>`<a href="${esc(d.enlace)}" target="_blank" rel="noopener" title="${esc(d.nombre)}">N°${d.n}</a>`).join("")}</div>`:""}
     ${open?`<div class="more"><h4>Qué se hace</h4><ul>${n.acciones.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>
-      ${n.documentos?.length?`<h4>Documentos</h4><div class="docs">${n.documentos.map(d=>`<div class="docrow">${svg("doc")}<span>${esc(docNom(d))}</span>
+      ${(n.documentos||[]).some(d=>d.n)?`<h4>Formularios (anexos)</h4><div class="docs">${n.documentos.filter(d=>d.n).map(d=>`<div class="docrow">${svg("doc")}<span>${esc(d.nombre)}</span>
+        <a class="mini" href="${esc(d.enlace)}" target="_blank" rel="noopener">Abrir</a></div>`).join("")}</div>`:""}
+      ${(n.documentos||[]).some(d=>!d.n)?`<h4>Registros</h4><div class="docs">${n.documentos.filter(d=>!d.n).map(d=>`<div class="docrow">${svg("lista")}<span>${esc(docNom(d))}</span>
         ${docLink(d)?`<a class="mini" href="${esc(docLink(d))}" target="_blank" rel="noopener">Abrir</a>`:""}</div>`).join("")}</div>`:""}
       <button class="close" data-node="${n.id}">Cerrar ↑</button></div>`:""}
   </div>`;
 }
 
+function guia(completa){
+  return `<h3 class="sec">Formularios por etapa</h3>
+    <p class="sec-sub">${completa?"Toda pauta sigue estas 4 etapas. ":""}Solo se usan los formularios oficiales de las Pautas MEP 2026.</p>
+    <div class="guia">${GUIA.map(g=>`<div class="g-et"><div class="g-h"><b>${g.e}</b><span>${ETAPAS[g.e]}</span></div>
+      ${g.f.map(([n,t])=>`<a class="g-f" href="${FP}#page=${FORMS[n][1]}" target="_blank" rel="noopener"><em>N°${n}</em><span>${esc(t)}</span></a>`).join("")}</div>`).join("")}</div>`;
+}
 function recursos(p){
   if(!p.recursos?.length) return "";
   return `<h3 class="sec">Documentos de seguimiento</h3>
@@ -1931,6 +1964,7 @@ function renderProto(){
     </div>
 
     ${recursos(p)}
+    ${p.pauta||p.atencion?guia(p.pauta):""}
     <h3 class="sec">Ruta del procedimiento</h3>
     <p class="sec-sub">Las fases lado a lado se hacen al mismo tiempo.</p>
     <div class="legend"><span><i class="lg-node"></i>Fase</span><span><i class="lg-stamp">Aprueba</i>Requiere aprobación</span>${p.fases.some(f=>f.emergencia)?`<span><i class="lg-node lg-sos"></i>Llamada al 911</span>`:""}</div>
