@@ -366,7 +366,7 @@ const DIRECTORIO=[
   ["Bomberos","2261-2198"],["Comisión Nacional de Emergencias","2210-2828"],["PANI Heredia Norte","2237-8627"],
   ["PANI San Pablo","2261-4802"],["IAFA","2260-2339 / 4001-9222"],["Ministerio Público","2265-4000"]
 ];
-const NORMATIVA="https://drive.google.com/file/d/1Grmmoh5UGMNajRuLatsPdW5QcHJXtepe/view";
+const NORMATIVA="documentos/Normativa-Interna-2026.pdf";
 
 /* Paso de llamada al 911: aparece en rojo en la ruta */
 const L911=(id,predecesoras,responsable,extra=[],nombre="Llamar al 911 y abrir caso",plazo="Inmediato")=>({
@@ -451,7 +451,7 @@ P.push({
   responsableGeneral:"Comité de Prevención de Riesgos",
   alertas:["Una vez iniciada la evacuación, nadie se devuelve por objetos olvidados.","Evacuar con paso rápido, sin correr y en fila. En gradas, tomarse de las manos.","Mantenerse lejos de cables eléctricos, árboles y estructuras peligrosas."],
   normativa:"Materiales de Bomberos, CNE y Cruz Roja (Reto Escuela Segura)",
-  fuente:"https://drive.google.com/file/d/1nDvxgsdEPvohttsHDWoA8YERmA_Kp9I0/view",
+  fuente:"documentos/V-26-Sismo.pdf",
   fases:[
     {id:"1",nombre:"Protegerse durante el sismo",predecesoras:[],plazo:"Durante el sismo",icono:"escudo",responsable:"Docente a cargo del grupo",
      acciones:["Alejarse de ventanas y objetos que puedan caer","Mantener la calma y preparar la evacuación","En pasillo: apoyarse en la pared. En gradas: sentarse","En sitio abierto: sentarse o arrodillarse lejos de cables y árboles"]},
@@ -476,7 +476,7 @@ P.push({
   responsableGeneral:"Comité de Gestión de Riesgos, personal docente y administrativo",
   alertas:["Evacuar en orden, en fila y sin devolverse por ningún motivo.","Si hay humo: evacuar agachado o de rodillas, con un pañuelo en la nariz."],
   normativa:"Materiales de Bomberos, CNE y Cruz Roja (Reto Escuela Segura)",
-  fuente:"https://drive.google.com/file/d/1VwDApp74fl9j8RQk64xQvfnvbifCkiAf/view",
+  fuente:"documentos/V-24-Incendio.pdf",
   fases:[
     L911("1",[],"Secretaría o quien detecte el fuego",["Solicitar Bomberos"]),
     {id:"2",nombre:"Activar la alarma",predecesoras:[],plazo:"Inmediato",icono:"alerta",responsable:"Funcionario más cercano al fuego",
@@ -501,7 +501,7 @@ P.push({
   responsableGeneral:"Comité de Prevención de Riesgos, personal docente y administrativo",
   alertas:["En caso de evacuación, no regresar por bultos u otros objetos."],
   normativa:"Materiales de Bomberos, CNE y Cruz Roja (Reto Escuela Segura)",
-  fuente:"https://drive.google.com/file/d/1OYsdXmH-NVOrAodrVKlog6CoIullH4fL/view",
+  fuente:"documentos/V-25-Inundacion.pdf",
   fases:[
     L911("1",[],"Dirección o Subdirección",["Informar cuántas personas hay en el colegio y dónde se resguardan"]),
     {id:"2",nombre:"Subir a zonas altas",predecesoras:[],plazo:"Inmediato",icono:"ruta",responsable:"Docente a cargo del grupo",
@@ -522,7 +522,7 @@ P.push({
   responsableGeneral:"Comunidad educativa (personal, estudiantes y familias)",
   alertas:["Evitar el pánico.","No salir a menos que sea indispensable. La ceniza puede estar caliente."],
   normativa:"Comité de Gestión de Riesgos, oct-2024",
-  fuente:"https://drive.google.com/file/d/10hGxPOE0ifDKTNpGvIA0Qjr2E3D3rj-4/view",
+  fuente:"documentos/V-30-Erupcion-volcanica.pdf",
   fases:[
     {id:"1",nombre:"Prepararse",predecesoras:[],plazo:"Antes de la erupción",icono:"plan",responsable:"Comunidad educativa",
      acciones:["Tener mascarillas, lentes, gorra o toallas para humedecer","Agua (5 litros por persona al día) y comida enlatada","Linterna, radio de baterías y botiquín","Sellar tanques de agua y cubrir equipos electrónicos"]},
@@ -542,7 +542,7 @@ P.push({
   responsableGeneral:"Dirección y Comité de Gestión de Riesgo",
   alertas:["Estudiantes y personal con asma o rinitis no deben presentarse al colegio."],
   normativa:"Aprobado por Dirección y Consejo de Profesores",
-  fuente:"https://drive.google.com/file/d/1NEraSpo3XUzYLwCDJ78TvdbX_4mH226s/view",
+  fuente:"documentos/V-27-Caida-de-ceniza.pdf",
   fases:[
     {id:"1",nombre:"Traslado protegido",predecesoras:[],plazo:"Al venir y al volver a casa",icono:"persona",responsable:"Estudiantes y personal",
      acciones:["Usar cubrebocas, gorra, gafas y abrigo","Llevar botella de agua, toallitas húmedas y mascarilla"]},
@@ -562,7 +562,7 @@ P.push({
   responsableGeneral:"Comunidad educativa (personal, estudiantes y familias)",
   alertas:["No refugiarse bajo árboles.","Si hay cables eléctricos caídos, no tocarlos y reportarlo de inmediato."],
   normativa:"Comité de Gestión de Riesgos, oct-2024",
-  fuente:"https://drive.google.com/file/d/1jsur-vPD0ToTmcbFcNLaQhi07fKsi7TG/view",
+  fuente:"documentos/V-31-Caida-de-granizo.pdf",
   fases:[
     {id:"1",nombre:"Prevenir",predecesoras:[],plazo:"Antes",icono:"plan",responsable:"Administración",
      acciones:["Reforzar techos livianos, domos y tragaluces","Mantener limpios techos, coladeras y bajantes","Ante alerta, guardar vehículos bajo techo"]},
@@ -582,7 +582,7 @@ P.push({
   responsableGeneral:"Comunidad educativa (personal, estudiantes y familias)",
   alertas:["No usar celular, computadora ni tableta durante la tormenta.","Nunca refugiarse bajo un árbol grande y aislado."],
   normativa:"Comité de Gestión de Riesgos, oct-2024",
-  fuente:"https://drive.google.com/file/d/1mS6YAfG7AVjlTuU3Epl7wDQijU8WlhA3/view",
+  fuente:"documentos/V-29-Tormenta-electrica.pdf",
   fases:[
     {id:"1",nombre:"Estar preparados",predecesoras:[],plazo:"Antes",icono:"plan",responsable:"Administración",
      acciones:["Revisar árboles en mal estado","Tener kit de emergencias: linterna, radio, botiquín y agua","Conocer cómo cortar luz, agua y gas","Definir punto de reunión"]},
@@ -603,7 +603,7 @@ P.push({
   responsableGeneral:"Comunidad educativa y Comité de Gestión de Riesgos",
   alertas:["Evitar gimnasios, auditorios, comedor y espacios con techos amplios: pueden colapsar.","No salir del refugio hasta que las autoridades lo indiquen."],
   normativa:"Protocolo para atención de emergencias, desastres y riesgo social (MEP)",
-  fuente:"https://drive.google.com/file/d/1exTBcRehBpDKpb4qkEHO7YPXDvlupuW5/view",
+  fuente:"documentos/V-23-Tornado-o-torbellino.pdf",
   fases:[
     {id:"1",nombre:"Prevenir",predecesoras:[],plazo:"Antes del evento",icono:"plan",responsable:"Dirección y Comité de Riesgos",
      acciones:["Señalar las habitaciones seguras, sin vidrios ni objetos que caigan","Asegurar macetas, herramientas y basureros","Limpiar canoas y desagües","Hacer simulacros periódicos"]},
@@ -628,7 +628,7 @@ P.push({
   responsableGeneral:"Dirección",
   alertas:["El estudiante solo puede retirarse si la familia lo autorizó en la boleta de matrícula y en el cuaderno de comunicaciones.","Sin autorización, el estudiante permanece en el colegio hasta que lo retire su encargado."],
   normativa:"Normas de Control Interno para el Sector Público · Ley General de Salud",
-  fuente:"https://drive.google.com/file/d/1ZQ1O-0kHJlyqe-YLWGkITskJg9vlQauv/view",
+  fuente:"documentos/V-21-Suspension-del-servicio-electrico.pdf",
   fases:[
     {id:"1",nombre:"Verificar la causa",predecesoras:[],plazo:"Inmediato",icono:"lupa",responsable:"Dirección",
      acciones:["Consultar a la ESPH si es una suspensión general","Si es un daño interno, coordinar la reparación con la Junta Administrativa"]},
@@ -650,7 +650,7 @@ P.push({
   responsableGeneral:"Dirección",
   alertas:["Si se suspende el agua, solo se usan los baños de las plantas bajas."],
   normativa:"Normas de Control Interno para el Sector Público · Ley General de Salud",
-  fuente:"https://drive.google.com/file/d/1PA1Zy4tUNjQWQUGZ6ZJ4UMPVLes1lDgk/view",
+  fuente:"documentos/V-10-Faltante-de-agua.pdf",
   fases:[
     {id:"1",nombre:"Verificar la causa",predecesoras:[],plazo:"Inmediato",icono:"lupa",responsable:"Dirección",
      acciones:["Consultar a la ESPH o Municipalidad","Si es un daño interno, coordinar la reparación con la Junta Administrativa"]},
@@ -666,7 +666,7 @@ P.push({
 });
 
 P.push({
-  codigo:"V-18", atencion:true, area:"riesgo", nombre:"Amenaza o tiroteo en el colegio",
+  codigo:"V-18", area:"riesgo", nombre:"Amenaza o tiroteo en el colegio",
   resumen:"Cómo actuar ante una amenaza de tiroteo y qué hacer durante y después de un tiroteo dentro del centro educativo.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -674,22 +674,22 @@ P.push({
   responsableGeneral:"Directora, Comité de Prevención de Riesgos y todo el personal",
   alertas:["Toda amenaza se considera de riesgo.","No tomar fotos ni videos de lo que ocurre.","El lugar seguro del CTP Mercedes Norte es la Dirección.","Al salir del resguardo: manos visibles, sin objetos y sin movimientos bruscos."],
   normativa:"Guía para el afrontamiento de amenazas y tiroteos en centros educativos (MEP, 2022) · Reglamento de Evaluación de los Aprendizajes, art. 156",
-  fuente:"https://drive.google.com/file/d/172BWmKqjBNc5aLJmEtHp1lj0wTHzcAfw/view",
+  fuente:"documentos/V-18-Amenaza-o-tiroteo.pdf",
   fases:[
     L911("1",[],"Quien conozca la situación o Dirección",["Si hay disparos: llamar de inmediato y aislar la zona","Si es una amenaza: indicar cómo llegó (mensaje, redes, llamada)"]),
     {id:"2",nombre:"Proteger de inmediato",predecesoras:[],plazo:"Inmediato",icono:"escudo",responsable:"Todas las personas",
      acciones:["Amenaza: resguardar a las personas; el lugar seguro es la Dirección","Tiroteo: escapar si hay ruta, sin llevar pertenencias","Si no puede salir: cerrar con llave y bloquear la puerta","Alejarse de ventanas, boca abajo, silenciar celulares y apagar la luz"]},
     {id:"3",nombre:"Valorar y denunciar",predecesoras:["1","2"],plazo:"Tras asegurar a las personas",icono:"plan",responsable:"Dirección",
-     acciones:["Analizar cómo, dónde y contra quién es la amenaza","Persona identificada: Ministerio Público · desconocida: OIJ","Si es menor de edad: Fiscalía Penal Juvenil y PANI","Si es estudiante identificado: avisar a la familia y valorar el art. 156 del REA","Si se recogen armas: levantar el acta de resguardo"],documentos:[FM(2),FM(8),FM(4),FM(5)]},
+     acciones:["Analizar cómo, dónde y contra quién es la amenaza","Persona identificada: Ministerio Público · desconocida: OIJ","Si es menor de edad: Fiscalía Penal Juvenil y PANI","Si es estudiante identificado: avisar a la familia y valorar el art. 156 del REA"]},
     {id:"4",nombre:"Coordinar la estrategia",predecesoras:["3"],plazo:"Tras la denuncia",icono:"familia",responsable:"Dirección y Comité de Riesgo",aprueba:"Dirección",
      acciones:["Reunirse con DRE, Supervisión, Contraloría de Derechos Estudiantiles, Fuerza Pública y Policía Municipal","Si la amenaza tiene fecha, valorar suspender lecciones","Informar a la comunidad educativa que se toman medidas"]},
     {id:"5",nombre:"Después: atender y reportar",predecesoras:["4"],plazo:"Después del evento",icono:"check",responsable:"Dirección",
-     acciones:["Referir a estudiantes afectados a Psicología o Psiquiatría de la CCSS","Enviar informe a DRE, Supervisión y Contraloría de Derechos Estudiantiles","Dar contención emocional y seguimiento"],documentos:[FM(7),FM(11),FM(12)]}
+     acciones:["Referir a estudiantes afectados a Psicología o Psiquiatría de la CCSS","Enviar informe a DRE, Supervisión y Contraloría de Derechos Estudiantiles","Dar contención emocional y seguimiento"],documentos:["Informe de lo actuado","Acta de intervención policial"]}
   ]
 });
 
 P.push({
-  codigo:"V-33", atencion:true, area:"riesgo", nombre:"Amenaza de explosivo en el colegio",
+  codigo:"V-33", area:"riesgo", nombre:"Amenaza de explosivo en el colegio",
   resumen:"Evento crítico: cómo alertar, evacuar y ponerse a salvo ante una amenaza de explosivo dentro del centro educativo.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -697,7 +697,7 @@ P.push({
   responsableGeneral:"Comité de Riesgo, Directora y todo el personal",
   alertas:["No tocar ni mover objetos sospechosos.","No usar radios ni celulares cerca del objeto.","Evacuar sin llevar nada.","Cocineras: solo cerrar la llave del gas y salir."],
   normativa:"DM-DVM-AC-0040-2026 Síntesis para el abordaje de amenazas y eventos críticos · Plan de Prevención de Riesgo CTPMN",
-  fuente:"https://drive.google.com/file/d/1aZdDYldJHAUNNGQSDLu8pMRtrCoUDuV3/view",
+  fuente:"documentos/V-33-Amenaza-de-explosivo-en-el-colegio.pdf",
   fases:[
     L911("1",[],"Quien se percate y Dirección",["Llamar lejos del objeto sospechoso","Llamar también a la Delegación Policial de Mercedes (2260-7461)","Dirección avisa a la Supervisión DREH"]),
     {id:"2",nombre:"Dar la alerta interna",predecesoras:[],plazo:"Inmediato",icono:"alerta",responsable:"Quien se percate",
@@ -709,12 +709,12 @@ P.push({
     {id:"5",nombre:"Barrer áreas y cerrar portones",predecesoras:["3"],plazo:"Simultáneo",icono:"escudo",responsable:"Personal sin grupo y vigilancia",
      acciones:["Personal sin grupo revisa que nadie quede en aulas, baños u oficinas","Vigilancia cierra portones: solo entran vehículos de emergencia"]},
     {id:"6",nombre:"Esperar y entregar",predecesoras:["1","4","5"],plazo:"Hasta nueva indicación",icono:"familia",responsable:"Docentes y Dirección",
-     acciones:["Esperar indicaciones de las autoridades","Entregar a cada estudiante a su familia"],documentos:[FM(5)]}
+     acciones:["Esperar indicaciones de las autoridades","Entregar a cada estudiante a su familia"],documentos:["Compromiso de padres de familia: protocolo en caso de emergencia","Reporte breve del evento crítico"]}
   ]
 });
 
 P.push({
-  codigo:"V-34", atencion:true, area:"riesgo", nombre:"Amenaza de explosivo o arma fuera del colegio",
+  codigo:"V-34", area:"riesgo", nombre:"Amenaza de explosivo o arma fuera del colegio",
   resumen:"Evento crítico externo: cierre del colegio y resguardo dentro de aulas y oficinas.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -722,7 +722,7 @@ P.push({
   responsableGeneral:"Comité de Riesgo, Directora y todo el personal",
   alertas:["Nadie entra ni sale del colegio hasta que lo indiquen las autoridades.","Apagar celulares, computadoras y la luz durante el resguardo."],
   normativa:"DM-DVM-AC-0040-2026 Síntesis para el abordaje de amenazas y eventos críticos · Plan de Prevención de Riesgo CTPMN",
-  fuente:"https://drive.google.com/file/d/1KVBmlPPTb_5Vwk4LLbq29U4rvNJYVNRg/view",
+  fuente:"documentos/V-34-Amenaza-de-explosivo-o-arma-fuera-del-colegio.pdf",
   fases:[
     L911("1",[],"Quien se percate y Dirección",["Indicar que el evento es externo al colegio","Llamar también a la Delegación Policial de Mercedes (2260-7461)","Dirección avisa a la Supervisión DREH"]),
     {id:"2",nombre:"Dar la alerta interna",predecesoras:[],plazo:"Inmediato",icono:"alerta",responsable:"Quien se percate",
@@ -732,13 +732,13 @@ P.push({
     {id:"4",nombre:"Alarma y resguardo",predecesoras:["2"],plazo:"Simultáneo",icono:"escudo",responsable:"Docentes y todas las personas",
      acciones:["Se activa la alarma de incendio como señal","Docentes en el aula con sus estudiantes a puerta cerrada","Quien esté afuera entra al aula, baño u oficina más cercana","Alejarse de ventanas, bloquear la puerta y ponerse boca abajo"]},
     {id:"5",nombre:"Esperar indicaciones",predecesoras:["1","3","4"],plazo:"Hasta que las autoridades indiquen",icono:"check",responsable:"Dirección",
-     acciones:["Nadie sale hasta recibir la indicación de las autoridades"]}
+     acciones:["Nadie sale hasta recibir la indicación de las autoridades"],documentos:["Reporte breve del evento crítico"]}
   ]
 });
 
 /* ===== SALUD Y BIENESTAR ===== */
 P.push({
-  codigo:"V-20", atencion:true, area:"salud", nombre:"Crisis de ansiedad o de control emocional",
+  codigo:"V-20", area:"salud", nombre:"Crisis de ansiedad o de control emocional",
   resumen:"Cómo contener a una persona en crisis de ansiedad o sin control de sus emociones mientras llega ayuda.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -746,7 +746,7 @@ P.push({
   responsableGeneral:"Funcionarios del CTP Mercedes Norte y Comité de Prevención de Riesgos",
   alertas:["Resguardar siempre la confidencialidad y la imagen del estudiante.","Las llamadas a la familia se hacen desde el teléfono del colegio."],
   normativa:"Protocolos de actuación del CTP Mercedes Norte",
-  fuente:"https://drive.google.com/file/d/1jtIGCw6EwWwypIRFwlzP1cKUlvYQyIrF/view",
+  fuente:"documentos/V-20-Crisis-de-ansiedad.pdf",
   fases:[
     {id:"1",nombre:"Contener a la persona",predecesoras:[],plazo:"Inmediato",icono:"persona",responsable:"Docente o quien esté presente",
      acciones:["Crisis de ansiedad: dar una bolsa de papel y pedir que respire despacio","Falta de control: intentar calmar; si no se logra, sacar al grupo del aula","Fuera del aula: despejar el lugar y proteger su privacidad","Ofrecer agua, un espacio privado, escribir lo que siente o música, según desee"]},
@@ -755,14 +755,14 @@ P.push({
     {id:"3",nombre:"Valorar la situación",predecesoras:["1","2"],plazo:"Al llegar el apoyo",icono:"lupa",responsable:"Administrativo o Comité de Riesgos",
      acciones:["Si ya se estabilizó, puede seguir en clase","Si sigue en crisis, trasladar en silla de ruedas a la Administración","Llamar al 911 si se requiere","Si está inconsciente: hablarle, hielo detrás del cuello y volver a llamar al 911 si tarda la ayuda"]},
     {id:"4",nombre:"Avisar a la familia y registrar",predecesoras:["3"],plazo:"Mismo día",icono:"familia",responsable:"Administración",
-     acciones:["Llamar a la madre, padre o encargado","Anotar en el Libro de Incidencias","Si hay ideación suicida o autolesión: completar Formulario N°2 y referir con el N°9"],documentos:["Libro de Incidencias",FM(2),FM(9)]},
+     acciones:["Llamar a la madre, padre o encargado","Anotar en el Libro de Incidencias"],documentos:["Libro de Incidencias"]},
     {id:"5",nombre:"Decisión de la familia",predecesoras:["4"],plazo:"Al llegar la familia",icono:"check",responsable:"Encargado legal",
-     acciones:["Decide si espera a la Cruz Roja o traslada por sus medios","Si se estabiliza antes, puede pedir cancelar la unidad","Firma su decisión en el Libro de Incidencias","Si el estudiante es trasladado a otra instancia, levantar el acta de traslado"],documentos:["Libro de Incidencias",FM(3)]}
+     acciones:["Decide si espera a la Cruz Roja o traslada por sus medios","Si se estabiliza antes, puede pedir cancelar la unidad","Firma su decisión en el Libro de Incidencias"]}
   ]
 });
 
 P.push({
-  codigo:"V-32", atencion:true, area:"salud", nombre:"Accidente o incidente de salud",
+  codigo:"V-32", area:"salud", nombre:"Accidente o incidente de salud",
   resumen:"Qué hacer cuando un estudiante sufre un accidente o problema de salud dentro o fuera del aula.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Inmediato",
@@ -770,7 +770,7 @@ P.push({
   responsableGeneral:"Dirección y Comité de Gestión de Riesgo",
   alertas:["NO llamar a la familia desde un teléfono personal: siempre a través de Secretaría.","Si la familia se lleva al estudiante por su cuenta, debe firmar en el Libro de Incidencias."],
   normativa:"Aprobado por Dirección y Consejo de Profesores · actualizado julio 2026",
-  fuente:"https://drive.google.com/file/d/13Gqubv8_3iMCErEzPryG8p9sW23sRk81/view",
+  fuente:"documentos/V-32-Accidente-o-incidente-de-salud.pdf",
   fases:[
     L911("1",[],"Secretaría, a solicitud de quien atiende",["Dar nombre y sección del estudiante","Secretaría avisa a la familia al mismo tiempo, desde el teléfono del colegio","Si quien atiende llamó directo al 911, debe reportarlo luego a Secretaría"]),
     {id:"2",nombre:"Atender y aislar",predecesoras:[],plazo:"Inmediato",icono:"persona",responsable:"Docente o funcionario presente",
@@ -778,7 +778,7 @@ P.push({
     {id:"3",nombre:"Traslado a Dirección",predecesoras:["1","2"],plazo:"Si requiere Cruz Roja",icono:"edificio",responsable:"Comité de Riesgos",
      acciones:["Valorar traslado en silla de ruedas o camilla a la Dirección"]},
     {id:"4",nombre:"Acompañar o entregar",predecesoras:["3"],plazo:"Según el paramédico",icono:"familia",responsable:"Funcionario designado",
-     acciones:["Si lo trasladan a un centro médico y la familia no ha llegado, un funcionario lo acompaña","Levantar el acta de traslado","Si la familia decide llevárselo, firma en el Libro de Incidencias y se llama al 911 para cancelar"],documentos:["Libro de Incidencias",FM(3)]}
+     acciones:["Si lo trasladan a un centro médico y la familia no ha llegado, un funcionario lo acompaña","Si la familia decide llevárselo, firma en el Libro de Incidencias y se llama al 911 para cancelar"]}
   ]
 });
 
@@ -791,7 +791,7 @@ P.push({
   responsableGeneral:"Comunidad educativa",
   alertas:["El colegio no tiene personal para trasladar estudiantes en silla: la ayuda de compañeros es voluntaria.","Colocar la silla donde no obstruya la salida en caso de evacuación."],
   normativa:"Comité de Gestión de Riesgos · oct-2024",
-  fuente:"https://drive.google.com/file/d/1bK_oTDZhsushWnVya8sF37_yEpxOZcq6/view",
+  fuente:"documentos/V-19-Uso-de-silla-de-ruedas.pdf",
   fases:[
     {id:"1",nombre:"Solicitud de la familia",predecesoras:[],plazo:"Antes del uso",icono:"familia",responsable:"Madre, padre o encargado",
      acciones:["Escribir y firmar en el cuaderno de comunicaciones la solicitud","Indicar que se hace responsable por daños","Autorizar a compañeros voluntarios a ayudar"],documentos:["Cuaderno de comunicaciones","Formulario de uso de silla de ruedas"]},
@@ -806,7 +806,7 @@ P.push({
 
 /* ===== CONVIVENCIA Y SEGURIDAD ===== */
 P.push({
-  codigo:"V-17", atencion:true, area:"convivencia", nombre:"Prevención de denuncias por Ley 9999",
+  codigo:"V-17", area:"convivencia", nombre:"Prevención de denuncias por Ley 9999",
   resumen:"Pautas para el personal que previenen situaciones de maltrato físico, psicológico o verbal hacia estudiantes.",
   perfiles:["administrativo","docente"],
   plazoTotal:"Aplicación permanente",
@@ -814,16 +814,16 @@ P.push({
   responsableGeneral:"Todas las personas funcionarias",
   alertas:["No quedarse a solas con estudiantes en aulas u oficinas.","No mantener chats en redes sociales con estudiantes.","No subir estudiantes a vehículos personales."],
   normativa:"Ley 9999 · Normativa Interna vigente · Acta 11-2022, art. 11 Consejo de Profesores",
-  fuente:"https://drive.google.com/file/d/1rK5Sawu2g4fXH9qqbC8CH0HXCsO09nhw/view",
+  fuente:"documentos/V-17-Ley-9999.pdf",
   fases:[
     {id:"1",nombre:"Trato y lenguaje",predecesoras:[],plazo:"Siempre",icono:"persona",responsable:"Personas funcionarias",
      acciones:["No hacer bromas a estudiantes","Cuidar el tono y el vocabulario","No regañar en público a una persona en específico","Evitar comentarios discriminatorios","No indagar sobre la vida privada del estudiante"]},
     {id:"2",nombre:"Contacto y espacios",predecesoras:[],plazo:"Siempre",icono:"escudo",responsable:"Personas funcionarias",
      acciones:["Evitar abrazos o palmadas","No tomar del brazo o la mano para dar indicaciones","En una contención, estar acompañado de testigos","Pedir consentimiento antes de usar a alguien de ejemplo"]},
     {id:"3",nombre:"Comunicación con familias",predecesoras:["1","2"],plazo:"Siempre",icono:"familia",responsable:"Docentes",
-     acciones:["Reportar situaciones a tiempo a la familia","Usar solo canales oficiales: correo MEP, cuaderno de comunicaciones o Teams","Levantar acta de cada reunión y entregar copia firmada"],documentos:[FM(5)]},
+     acciones:["Reportar situaciones a tiempo a la familia","Usar solo canales oficiales: correo MEP, cuaderno de comunicaciones o Teams","Levantar acta de cada reunión y entregar copia firmada"],documentos:["Boleta de atención a padres de familia"]},
     {id:"4",nombre:"Ante una situación",predecesoras:["3"],plazo:"Cuando ocurra",icono:"alerta",responsable:"Persona funcionaria",
-     acciones:["Aclarar las razones si algo se malinterpretó","Denunciar ante el Ministerio Público amenazas recibidas","Atender las alertas de los compañeros","Ante sospecha de violencia de un funcionario hacia un estudiante, se activa la Pauta 4 con el Formulario N°1"],documentos:[FM(1)]}
+     acciones:["Aclarar las razones si algo se malinterpretó","Denunciar ante el Ministerio Público amenazas recibidas","Atender las alertas de los compañeros"]}
   ]
 });
 
@@ -836,7 +836,7 @@ P.push({
   responsableGeneral:"Comité de Evaluación",
   alertas:["La apelación a Dirección vence 3 días hábiles después de entregado el Informe de Calificaciones al Hogar."],
   normativa:"Reglamento de Evaluación de los Aprendizajes vigente",
-  fuente:"https://drive.google.com/file/d/18YFdWuuUn2RIVtJbItdW8TfVjW8dxFpD/view",
+  fuente:"documentos/V-14-Apelacion-de-boletas.pdf",
   fases:[
     {id:"1",nombre:"Aviso de la boleta",predecesoras:[],plazo:"Al aplicar la boleta",icono:"plan",responsable:"Funcionario que la elabora",
      acciones:["Enviar constancia de la boleta a la familia"],documentos:["Boleta disciplinaria"]},
@@ -856,7 +856,7 @@ P.push({
   responsableGeneral:"Auxiliares de seguridad y vigilancia",
   alertas:["Después de las 4:30 p.m. solo ingresa quien tenga cita.","Sábados y domingos solo con autorización de la Junta o la Dirección.","Los visitantes no ingresan a los edificios de aulas."],
   normativa:"Guía general para la prevención y atención de la violencia con armas en centros educativos",
-  fuente:"https://drive.google.com/file/d/1eS4fHNiJtIn4Be3mRrbJ-Nl-20efYJHM/view",
+  fuente:"documentos/V-06-Ingreso-y-registro-de-visitantes.pdf",
   fases:[
     {id:"1",nombre:"Reportarse en el portón",predecesoras:[],plazo:"Al llegar",icono:"persona",responsable:"Persona visitante",
      acciones:["Indicar al auxiliar de vigilancia el trámite o a dónde se dirige"]},
@@ -881,7 +881,7 @@ P.push({
   responsableGeneral:"Funcionarios, personas encargadas y estudiantes",
   alertas:["La plataforma oficial es Microsoft Teams.","Las ausencias a lecciones virtuales se justifican en el cuaderno de comunicaciones en 3 días hábiles."],
   normativa:"Política de Educación Híbrida (PEHí) · Circular DM-CIR-0077-2025",
-  fuente:"https://drive.google.com/file/d/1rBPci7UkOYkWvp773Y3KT9Lrq6BwFCsG/view",
+  fuente:"documentos/V-22-Educacion-hibrida.pdf",
   fases:[
     {id:"1",nombre:"Boleta de dispositivos",predecesoras:[],plazo:"En la matrícula",icono:"familia",responsable:"Familias",
      acciones:["Completar la boleta de información de dispositivos tecnológicos"],documentos:["Boleta de información de dispositivos tecnológicos"]},
@@ -908,7 +908,7 @@ P.push({
   responsableGeneral:"Dirección y todas las personas funcionarias",
   alertas:["Los mensajes de WhatsApp a compañeros NO son un reporte oficial.","Tres llegadas tardías equivalen a una ausencia injustificada.","Los docentes deben presentarse 10 minutos antes de su jornada."],
   normativa:"Lineamientos para la Gestión de Procedimientos en los Centros Educativos (MEP) · Código de Trabajo, art. 72 · Código de Educación, art. 120",
-  fuente:"https://drive.google.com/file/d/12tZ_jGjz2AeFf7f1xjuo5tIxdWTW4wt5/view",
+  fuente:"documentos/II-06-Ausencias-tardias-incapacidades-y-permisos.pdf",
   canales:"Correo ctp.mercedes.norte@mep.go.cr · Teléfonos 2260-5090 / 2261-7445",
   fases:[
     {id:"1",nombre:"Pedir permiso",predecesoras:[],plazo:"48 horas antes de ausentarse",icono:"plan",responsable:"Persona funcionaria",aprueba:"Dirección",
@@ -931,7 +931,7 @@ P.push({
   responsableGeneral:"Dirección",
   alertas:["El formulario debe ir completo, firmado y sellado, sin tachones ni alteraciones."],
   normativa:"Ley de Carrera Docente y su Reglamento · Normas de Control Interno · VM-DRH-09-029-2022",
-  fuente:"https://drive.google.com/file/d/1x2KySuJIofr2VKcgy_4fqbCDWx7ACCFQ/view",
+  fuente:"documentos/II-12-Rebajo-de-salario.pdf",
   fases:[
     {id:"1",nombre:"Justificar la ausencia",predecesoras:[],plazo:"48 horas",icono:"persona",responsable:"Persona funcionaria",
      acciones:["Presentar los documentos que justifican la ausencia"]},
@@ -951,7 +951,7 @@ P.push({
   responsableGeneral:"Dirección y Subdirección",
   alertas:["Es obligatorio portar el carné visible durante toda la jornada.","Primera pérdida: llamada de atención verbal. Segunda en 3 meses: amonestación escrita."],
   normativa:"Circular VM-A-DRH-08-026-2022",
-  fuente:"https://drive.google.com/file/d/1zyCAOip-VKAvrp78dKLsRaAYQrhHJIam/view",
+  fuente:"documentos/II-11-Carne-institucional.pdf",
   fases:[
     {id:"1",nombre:"Solicitar el carné",predecesoras:[],plazo:"3 días hábiles desde el ingreso",icono:"persona",responsable:"Persona funcionaria",
      acciones:["Coordinar la confección con la Subdirección"]},
@@ -967,8 +967,8 @@ P.push({
 });
 
 /* ===== ÁREA I: PATRIMONIO · ÁREA IV: INFORMACIÓN ===== */
-const XI="https://drive.google.com/file/d/1LSlMjtBJp8JCcBbsqYtxiGYHxhN8Y2Wl/view";
-const XIV="https://drive.google.com/file/d/11keKvHNXxfo4nYnrYDcdc7LcasBdaq0k/view";
+const XI="documentos/Area-I-Patrimonio.pdf";
+const XIV="documentos/Area-IV-Informacion.pdf";
 
 P.push({
   codigo:"I-01", area:"recursos", nombre:"Préstamo de equipo audiovisual",
@@ -1137,8 +1137,8 @@ P.push({
 });
 
 /* ===== ÁREA II: RECURSO HUMANO · ÁREA III: SEGURIDAD ===== */
-const XII="https://drive.google.com/file/d/1dZ0P8iIhUR2YH9vmgMGqckTeGKPYMNto/view";
-const XIII="https://drive.google.com/file/d/1YuCG03TNOZFyGjw33hTbkjUWUxjw2SgO/view";
+const XII="documentos/Area-II-Recurso-humano.pdf";
+const XIII="documentos/Area-III-Seguridad.pdf";
 
 P.push({
   codigo:"II-02", area:"personal", nombre:"Directrices generales para el personal",
@@ -1387,8 +1387,8 @@ P.push({
 });
 
 /* ===== ÁREA V: OPERACIONES · ÁREA VI: POLÍTICA EDUCATIVA ===== */
-const XV="https://drive.google.com/file/d/1276coLxZFPq9oHl16ZmGwZkarC9uiwUE/view";
-const XVI="https://drive.google.com/file/d/1SJ4jCQCxJIHzrdGYKCNp9Xky-aefYsvX/view";
+const XV="documentos/Area-V-Operaciones.pdf";
+const XVI="documentos/Area-VI-Politica-educativa.pdf";
 
 /* --- Convivencia y seguridad --- */
 P.push({
@@ -1414,7 +1414,7 @@ P.push({
 });
 
 P.push({
-  codigo:"V-09", atencion:true, area:"convivencia", nombre:"Pérdida o robo de objetos personales",
+  codigo:"V-09", area:"convivencia", nombre:"Pérdida o robo de objetos personales",
   resumen:"Qué hacer cuando un estudiante, funcionario o visitante pierde un objeto o sufre un robo en el colegio.",
   perfiles:["administrativo","docente","estudiante","padres"],
   plazoTotal:"Al reportar la pérdida",
@@ -1429,7 +1429,7 @@ P.push({
     {id:"2",nombre:"Inspeccionar",predecesoras:["1"],plazo:"Al recibir el reporte",icono:"lupa",responsable:"Directora",
      acciones:["Realizar una inspección e investigación","Revisar bolsos según los lineamientos vigentes","En casos muy calificados, pedir apoyo policial"]},
     {id:"3",nombre:"Devolver o denunciar",predecesoras:["2"],plazo:"Según el resultado",icono:"check",responsable:"Directora",
-     acciones:["Si aparece, devolver al comprobar que es suyo y levantar acta","Si se comprueba el robo, hacer la denuncia"],documentos:[FM(8)]}
+     acciones:["Si aparece, devolver al comprobar que es suyo y levantar acta","Si se comprueba el robo, hacer la denuncia"],documentos:["Acta de devolución"]}
   ]
 });
 
@@ -1762,7 +1762,7 @@ P.push({
   responsableGeneral:"Familia, Auxiliar Administrativo y Auxiliar de Seguridad y Vigilancia",
   alertas:["Salir o escaparse sin permiso es falta gravísima: rebajo de 50 puntos en conducta (Art. 42, n).","Después de las 9:20 a.m. solo se tramitan emergencias, retiro por el representante legal o ausencia del docente.","Sin cuaderno de comunicaciones o carné, el vigilante no puede verificar la salida.","Si la familia trae alimentos, se acerca al portón: el estudiante no cruza la calle."],
   normativa:"Normativa Interna Vigente 2026 · Art. 18, 42, 50 y 60 · Procedimiento III-04",
-  fuente:"https://drive.google.com/file/d/1Grmmoh5UGMNajRuLatsPdW5QcHJXtepe/view",
+  fuente:"documentos/Normativa-Interna-2026.pdf",
   fases:[
     {id:"1",nombre:"Solicitar el permiso",predecesoras:[],plazo:"Cita médica: de 7:00 a 9:20 a.m.",icono:"familia",responsable:"Madre, padre o encargado legal",
      acciones:["Escribir la solicitud de salida en el cuaderno de comunicaciones","Para almorzar fuera, la familia lo solicita con anticipación","Durante el día solo proceden emergencias, retiro por el representante legal o ausencia del docente"],documentos:["Cuaderno de comunicaciones"]},
